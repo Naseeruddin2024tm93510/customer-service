@@ -24,11 +24,7 @@ const CustomerUpload = ({ isOpen, onClose, onUploadSuccess }) => {
     formData.append('file', file);
 
     try {
-      await customerServiceApi.post('/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      await customerServiceApi.post('/upload', formData);
       setSuccess(true);
       setFile(null);
       if (onUploadSuccess) onUploadSuccess();

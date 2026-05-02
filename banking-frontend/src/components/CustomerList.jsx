@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { UserPlus, RefreshCw, Search, UploadCloud } from 'lucide-react';
 import { customerServiceApi } from '../api';
 import CustomerUpload from './CustomerUpload';
+import CustomerForm from './CustomerForm';
 
 const CustomerList = () => {
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [isUploadOpen, setIsUploadOpen] = useState(false);
+  const [isAddOpen, setIsAddOpen] = useState(false);
   const [selectedCustomer, setSelectedCustomer] = useState(null);
 
   useEffect(() => {
@@ -80,7 +82,7 @@ const CustomerList = () => {
             <UploadCloud size={18} />
             Import CSV
           </button>
-          <button className="btn-primary">
+          <button className="btn-primary" onClick={() => setIsAddOpen(true)}>
             <UserPlus size={18} />
             Add Customer
           </button>
@@ -166,6 +168,12 @@ const CustomerList = () => {
         isOpen={isUploadOpen} 
         onClose={() => setIsUploadOpen(false)} 
         onUploadSuccess={fetchCustomers}
+      />
+
+      <CustomerForm
+        isOpen={isAddOpen}
+        onClose={() => setIsAddOpen(false)}
+        onSuccess={fetchCustomers}
       />
 
       {/* View Detail Modal */}

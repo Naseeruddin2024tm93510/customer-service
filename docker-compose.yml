@@ -38,8 +38,9 @@ services:
       dockerfile: Dockerfile
     container_name: customer-service
     ports:
-      - "8081:8081"
+      - "9090:9090"
     environment:
+      - SERVER_PORT=9090
       - SPRING_DATASOURCE_URL=jdbc:mysql://customer-db:3306/customer-service?createDatabaseIfNotExist=true
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=Naseeruddin@786
@@ -52,6 +53,8 @@ services:
         condition: service_started
     networks:
       - banking-network
+    volumes:
+      - ./logs/customer-service:/app/logs
 
   customer-db:
     image: mysql:8.0
@@ -77,7 +80,7 @@ services:
       dockerfile: Dockerfile
     container_name: banking-frontend
     ports:
-      - "80:80"
+      - "3000:80"
     depends_on:
       - customer-service
     networks:

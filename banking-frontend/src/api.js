@@ -5,7 +5,7 @@ import axios from 'axios';
 // In the future, you can add accountServiceApi, transactionServiceApi, etc.
 
 export const customerServiceApi = axios.create({
-    baseURL: 'http://localhost:8081/api/v1/customers',
+    baseURL: 'http://localhost:9090/api/v1/customers',
     headers: {
         'Content-Type': 'application/json',
     }
